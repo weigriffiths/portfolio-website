@@ -19,8 +19,8 @@ export default function About() {
     >
       <SectionHeading>About me</SectionHeading>
       <p className="mb-3">
-        After graduating with a degree in{" "}
-        <span className="font-medium">Mechanical Engineering</span>, and a rewarding career serving in The Parachute Regiment, 
+        After studying {" "}
+        <span className="font-medium">Mechanical Engineering</span> at the University of Queensland, and having a rewarding career serving in The Parachute Regiment, 
         I decided to pursue my passion for programming. Over the past three years, I have self-taught myself {" "}
         <span className="font-medium">full-stack web development</span>.{" "}
         <span className="italic">My favourite part of programming</span> is the
