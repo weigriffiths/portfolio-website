@@ -24,7 +24,8 @@ export default function About() {
         I decided to pursue my passion for programming. Over the past three years, I have self-taught myself {" "}
         <span className="font-medium">full-stack web development</span>.{" "}
         <span className="italic">My favourite part of programming</span> is the
-        problem-solving aspect. I <span className="underline">love</span> the feeling that comes with solving a problem. 
+        problem-solving part and seeing users interact with the final product. 
+        I <span className="underline">love</span> to fix problems and see the final results in action! 
       </p>
 
       <p className="mb-3">

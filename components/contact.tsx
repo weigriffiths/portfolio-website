@@ -1,16 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import SectionHeading from "./section-heading";
 import { motion } from "framer-motion";
-import { useSectionInView } from "@/lib/hooks";
-import { sendEmail } from "@/actions/sendEmail";
-import SubmitBtn from "./submit-btn";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
+
+import { useSectionInView } from "@/lib/hooks";
+import { sendEmail } from "@/actions/sendEmail";
+import SectionHeading from "./section-heading";
+import SubmitBtn from "./submit-btn";
+
+interface FormValues {
+  senderEmail: string;
+  message: string;
+}
 
 export default function Contact() {
   const router = useRouter()
+  const { pending } = useFormStatus();
   const { ref } = useSectionInView("Contact");
 
   const onCopy = (id: string) => {
@@ -18,36 +26,47 @@ export default function Contact() {
     toast.success('Email copied to clipboard.');
   }
 
-  // const initialFormState = {
-  //   senderEmail: "",
-  //   message: ""
-  // };
+  const initialFormState: FormValues = {
+    senderEmail: "",
+    message: ""
+  };
 
-  // const [formData, setFormData] = useState(initialFormState);
+  const [formData, setFormData] = useState<FormValues>(initialFormState);
+  const [loading, setLoading] = useState(false)
 
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value
-  //   }));
-  // };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
 
-  // const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try{
+      setLoading(true)
+      
+      const { data, error } = await sendEmail(formData);
+  
+      if (error) {
+        toast.error(error);
+        return;
+      }
+  
+      toast.success("Email sent successfully!");
 
-  //   const { data, error } = await sendEmail(formData);
+      // Reset the form data after successful submission
+      setFormData(initialFormState);
+    } catch (error) {
+      console.error("Form submission error: ", error)
+      toast.error("Form submission error")
+    } finally {
+      setLoading(false)
+    }
 
-  //   if (error) {
-  //     toast.error(error);
-  //     return;
-  //   }
 
-  //   toast.success("Email sent successfully!");
-
-  //   // Reset the form data after successful submission
-  //   setFormData(initialFormState);
-  // };
+  };
 
   return (
     <motion.section
@@ -79,18 +98,18 @@ export default function Contact() {
 
       <form
         className="mt-10 flex flex-col dark:text-black"
-        // onSubmit={handleFormSubmit}
-        action={async (formData) => {
-          const { data, error } = await sendEmail(formData);
+        onSubmit={handleFormSubmit}
+        // action={async (formData) => {
+        //   const { data, error } = await sendEmail(formData);
 
-          if (error) {
-            toast.error(error);
-            return;
-          }
+        //   if (error) {
+        //     toast.error(error);
+        //     return;
+        //   }
 
-          toast.success("Email sent successfully!");
-          router.refresh()
-        }}
+        //   toast.success("Email sent successfully!");
+        //   router.refresh()
+        // }}
       >
         <input
           className="h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
@@ -99,6 +118,8 @@ export default function Contact() {
           required
           maxLength={500}
           placeholder="Your email"
+          value={formData.senderEmail}
+          onChange={handleInputChange}
         />
         <textarea
           className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
@@ -106,8 +127,10 @@ export default function Contact() {
           placeholder="Your message"
           required
           maxLength={5000}
+          value={formData.message}
+          onChange={handleInputChange}
         />
-        <SubmitBtn />
+        <SubmitBtn loading={loading} />
       </form>
     </motion.section>
   );

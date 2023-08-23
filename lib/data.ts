@@ -60,14 +60,6 @@ export const experiencesData = [
     date: "Jun 2021 - Feb 2022",
   },
   {
-    title: "Xperience Realty",
-    location: "Brisbane, Australia",
-    description:
-      "I developed a concept website for a real estate agency based in Brisbane. The purpose was to show Xperience how to improve their UI/UX design to enhance their offering for their clients. Used custom JS to develop mortgage calcuator.",
-    icon: React.createElement(CgWorkAlt),
-    date: "Jun 2022 - Sep 2022",
-  },
-  {
     title: "Full-Stack Developement",
     location: "Brisbane, Australia",
     description:
@@ -82,7 +74,7 @@ export const projectsData = [
     title: "Liangu",
     description:
       "I worked as a full-stack developer on this project. It is a property management and ticket-handling system for landlords and property managers. Tenants can submit tickets, view announcements and keep up to date with their community. Includes a tenant web-app and an admin dashboard with analytics.",
-    tags: ["React", "Next.js", "PlanetScale", "Tailwind", "Prisma", "Nodemailer", "Kanban Board", "Cloudinary", "Axios", "Radix", "Zustand"],
+    tags: ["React", "Next.js", "PlanetScale", "Tailwind", "Prisma", "Nodemailer", "Drag and Drop", "Cloudinary", "Axios", "Radix", "Zustand"],
     siteUrl: "",
     codeUrl: "",
     imageUrl: lianguDashboard,
@@ -90,7 +82,7 @@ export const projectsData = [
   {
     title: "Arno",
     description:
-      "I designed the homepage for a next-generation B2B invoice factoring company. Businesses can submit A/R invoices and get paid upfront in cash.",
+      "I developed the homepage for a next-generation B2B invoice factoring company. Businesses can submit A/R invoices and get paid upfront in cash.",
     tags: ["React", "Next.js", "Airtable", "Tailwind", "Stripe"],
     siteUrl: "https://www.arnohq.com.au",
     codeUrl: "",
@@ -99,7 +91,7 @@ export const projectsData = [
   {
     title: "Xperience Realty",
     description:
-      "I designed the homepage to improve this local real estate agency's offering for its clients. It included custom mortgage calculator that I created for use with their clients.",
+      "I designed and developed this concept website to show Xperience how to improve their UI/UX design and enhance their offering for their clients. Used custom JS to develop mortgage calcuator.",
     tags: ["React", "Next.js", "Chakra", "Firebase"],
     siteUrl: "https://xperience-realty-website.vercel.app/",
     codeUrl: "https://github.com/weigriffiths/xperience-realty-website",
