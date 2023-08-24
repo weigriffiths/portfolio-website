@@ -39,10 +39,16 @@ export default function Project({
             {description}
           </p>
           <p className="mt-2 font-medium text-xs">
-            Website: {" "} <span className="text-xs italic">{siteUrl ? <a href={siteUrl} target="_blank">{siteUrl}</a> : "Copyright"}</span>
+            Website: 
           </p>
-          <p className="my-2 font-medium text-xs">
-            Code: {" "} <span className="text-xs italic">{codeUrl ? <a href={codeUrl} target="_blank">{codeUrl}</a> : "Copyright"}</span>
+          <p className="mt-1 text-xs">
+            {siteUrl ? <a href={siteUrl} target="_blank">{siteUrl}</a> : "Copyright"}
+          </p>
+          <p className="mt-1 font-medium text-xs">
+            Code:
+          </p>
+          <p className="mt-1 mb-2 text-xs">
+            {codeUrl ? <a href={codeUrl} target="_blank">{codeUrl}</a> : "Copyright"}
           </p>
           <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
             {tags.map((tag, index) => (
